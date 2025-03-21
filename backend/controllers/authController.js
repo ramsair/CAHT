@@ -128,7 +128,7 @@ const googleSignInUser = async (req, res) => {
 
         const authToken = jwt.sign({ userId: users[0].id, email }, process.env.JWT_SECRET_KEY, { expiresIn: "24h" });
 
-        res.json({ token: authToken, userData: {userId: users[0].id,gistUrl: users[0].gist_url,email:users[0].email,publicKey:users[0].public_key}, });
+        res.json({ token: authToken, userData: {userId: users[0].id,gistUrl: users[0].gist_url,email:users[0].email,publicKey:users[0].public_key,name:users[0].full_name}, });
     } catch (error) {
         res.status(500).json({ error: error.message || "Google Sign-In Failed" });
     }

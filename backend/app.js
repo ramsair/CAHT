@@ -20,18 +20,18 @@ routes.initialize(app);
 io.on("connection", (socket) => {
     console.log("🔵 User connected:", socket.id);
 
-    socket.on("sendMessage", async ({ senderId, receiverId, encryptedForReceiver, encryptedForSender, signature  }) => {
+    socket.on("sendMessage", async ({ senderId, receiverId, encryptedForReceiver, encryptedForSender, signature,name  }) => {
         console.log("BE",senderId, receiverId, encryptedForReceiver, encryptedForSender, signature)
         db.promise().query(
             "INSERT INTO messages (sender_id, receiver_id, encrypted_for_receiver, encrypted_for_sender, signature, status) VALUES (?, ?, ?, ?, ?, 'unread')",
             [senderId, receiverId, encryptedForReceiver, encryptedForSender, signature]
         );
 
-        io.emit(`receiveMessage-${receiverId}`, { senderId });
+        io.emit(`receiveMessage-${receiverId}`, { senderId,name });
     });
 
     socket.on("disconnect", () => {
-        console.log("❌ User disconnected:", socket.id);
+        console.log("  User disconnected:", socket.id);
     });
 });
 

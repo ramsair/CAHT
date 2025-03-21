@@ -1,7 +1,7 @@
 const axios = require("axios");
 const db = require("../config/db");
 
-// ✅ Fetch Public Key from DB & GitHub Gist
+//    Fetch Public Key from DB & GitHub Gist
 const getPublicKey = async (req, res) => {
     const { userId } = req.params;
 
